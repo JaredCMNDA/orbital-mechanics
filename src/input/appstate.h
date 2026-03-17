@@ -6,7 +6,7 @@
 #define GRAVITY_BASINS_APPSTATE_H
 
 
-class App_State {
+class AppState {
 };
 
 

@@ -6,7 +6,7 @@
 #define GRAVITY_BASINS_SHAPEBUILDER_H
 
 
-class Shape_Builder {
+class ShapeBuilder {
 };
 
 
