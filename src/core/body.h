@@ -1,5 +1,5 @@
 //
-// Created by gaagaagi on 2026-03-16.
+// Created by gaagaagi on 2026-03-17.
 //
 
 #ifndef GRAVITY_BASINS_BODY_H
@@ -7,7 +7,6 @@
 
 
 class Body {
-    float mass;
 };
 
 

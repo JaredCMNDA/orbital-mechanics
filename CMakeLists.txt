@@ -17,11 +17,24 @@ FetchContent_MakeAvailable(raylib)
 
 # add executable
 add_executable(gravity-basins main.cpp
-        src/simulation.cpp
-        src/simulation.h
-        src/renderer.cpp
-        src/renderer.h
-        src/body.cpp
-        src/body.h)
+        src/core/shape.cpp
+        src/core/shape.h
+        src/core/body.cpp
+        src/core/body.h
+        src/core/simulation.cpp
+        src/core/simulation.h
+        src/physics/collisiondetector.cpp
+        src/physics/collisiondetector.h
+        src/physics/collisionresolver.cpp
+        src/physics/collisionresolver.h
+        src/rendering/camera.cpp
+        src/rendering/camera.h
+        src/rendering/renderer.cpp
+        src/rendering/renderer.h
+        src/input/appstate.cpp
+        src/input/appstate.h
+        src/input/shapebuilder.cpp
+        src/input/shapebuilder.h)
+
 target_link_libraries(gravity-basins PRIVATE raylib)
 
