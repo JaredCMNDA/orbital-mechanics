@@ -6,7 +6,8 @@
 #define GRAVITY_BASINS_BODY_H
 
 
-class body {
+class Body {
+    float mass;
 };
 
 

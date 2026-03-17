@@ -6,7 +6,7 @@
 #define GRAVITY_BASINS_RENDERING_H
 
 
-class rendering {
+class Renderer {
 };
 
 

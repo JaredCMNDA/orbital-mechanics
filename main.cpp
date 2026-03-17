@@ -5,6 +5,9 @@
 #include "raylib.h"
 #include <iostream>
 
+using namespace std;
+
+
 int main() {
 
     /* Variables */
@@ -27,8 +30,10 @@ int main() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-            ClearBackground(BLACK);
-            DrawTextEx(font, "Hello, World!", { 100, 100 }, 20, 1, WHITE);
+
+        ClearBackground(BLACK);
+        DrawTextEx(font, "Hello, World!", { 100, 100 }, 20, 1, WHITE);
+
         EndDrawing();
     }
 

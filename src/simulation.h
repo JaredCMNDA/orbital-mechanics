@@ -6,7 +6,7 @@
 #define GRAVITY_BASINS_SIMULATION_H
 
 
-class simulation {
+class Simulation {
 };
 
 
