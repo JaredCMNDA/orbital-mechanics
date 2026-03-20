@@ -4,32 +4,25 @@
 
 #include "shape.h"
 
-void Shape::create_shape(Point *centerPoint) {
-    // Handle point list and count
-    this->centerPoint = centerPoint;
-    this->position = {centerPoint->x, centerPoint->y};
-    Point* currentPoint = this->centerPoint;
-    do {
-        numPoints++;
-        currentPoint = currentPoint->next;
-    } while (currentPoint != nullptr && currentPoint != this->centerPoint);
+// Circle
+
+Circle::Circle(Vector2 position, float radius, Color color)
+    : Shape(position, color), radius(radius) {}
+
+void Circle::draw() {
+    DrawCircleV(position, radius, color);
 }
 
-void Shape::draw_shape() {
-        Vector2* points = create_vector2_array_from_point(centerPoint);
-        DrawTriangleFan(points, numPoints, color);
-        delete[] points;  // free the allocation
-}
+// Polygon
 
-Vector2 *Shape::create_vector2_array_from_point(Point *startPoint) const {
-    Vector2* pointsArray = new Vector2[numPoints];
-    Point* currentPoint = startPoint;
-    int index = 0;
-    do {
-        pointsArray[index] = {currentPoint->x, currentPoint->y};
-        currentPoint = currentPoint->next;
-        index++;
-    } while (currentPoint != nullptr && currentPoint != startPoint);
-    return pointsArray;
+Polygon::Polygon(Vector2 position, std::vector<Vector2> vertices, Color color)
+    : Shape(position, color), vertices(std::move(vertices)) {}
+
+void Polygon::draw() {
+    std::vector<Vector2> worldVertices(vertices.size());
+    for (size_t i = 0; i < vertices.size(); i++) {
+        worldVertices[i] = { position.x + vertices[i].x, position.y + vertices[i].y };
+    }
+    DrawTriangleFan(worldVertices.data(), static_cast<int>(worldVertices.size()), color);
 }
 

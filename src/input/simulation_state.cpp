@@ -52,11 +52,28 @@ void SimulationState::update() {
 }
 
 void SimulationState::draw() {
-    // Test shapes and positions. Normally move these out of the while loop but this is a starting point
+    /* THIS STUFF SHOULD NOT BE HERE
+     * BECAUSE THIS IS BEING CALLED IN A LOOP.
+     * THIS IS ONLY HERE FOR TESTING
+     */
+
     Vector2 worldPos1 = { 100.0f, 100.0f };
     Vector2 worldPos2 = { 130.0f, 130.0f };
+    // Try drawing a polygon
+    std::vector<Vector2> vertices;
+    // Make a diamond shape
+    vertices.push_back({0.0f, -100.0f});
+    vertices.push_back({-25.0f, -75.0f});
+    vertices.push_back({0.0f, -50.0f});
+    vertices.push_back({25.0f, -75.0f});
+
+    /* This is okay to be here! Just remove the above somewhere they are not within a loop. */
     DrawCircleV(worldPos1, 10.0f, RED);
     DrawRectangleV(worldPos2, { 30.0f, 20.0f }, BLUE);
+
+    DrawTriangleFan(vertices.data(), static_cast<int>(vertices.size()), GREEN);
+
+
 }
 
 void SimulationState::onEnter() {

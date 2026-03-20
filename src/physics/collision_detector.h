@@ -6,7 +6,7 @@
 #define GRAVITY_BASINS_COLLISIONDETECTOR_H
 
 
-class Collision_Detector {
+class CollisionDetector {
 };
 
 

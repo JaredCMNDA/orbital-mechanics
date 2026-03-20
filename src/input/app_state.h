@@ -5,6 +5,7 @@
 #ifndef GRAVITY_BASINS_APPSTATE_H
 #define GRAVITY_BASINS_APPSTATE_H
 
+#include <memory>
 #include <vector>
 
 #include "raylib.h"
@@ -19,7 +20,7 @@ enum class StateId {
 
 struct AppContext {
     Camera2D* camera;
-    std::vector<Shape>* shapes;
+    std::vector<std::unique_ptr<Shape>>* shapes;
     Font* font;
 };
 

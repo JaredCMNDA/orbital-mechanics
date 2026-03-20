@@ -20,9 +20,6 @@ void DrawState::update() {
 }
 
 void DrawState::draw() {
-    for (Shape& shape : *context.shapes) {
-        shape.draw_shape();
-    }
 }
 
 void DrawState::onEnter() {

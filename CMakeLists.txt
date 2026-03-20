@@ -23,10 +23,10 @@ add_executable(orbital-mechanics src/main.cpp
         src/core/body.h
         src/core/simulation.cpp
         src/core/simulation.h
-        src/physics/collisiondetector.cpp
-        src/physics/collisiondetector.h
-        src/physics/collisionresolver.cpp
-        src/physics/collisionresolver.h
+        src/physics/collision_detector.cpp
+        src/physics/collision_detector.h
+        src/physics/collision_resolver.cpp
+        src/physics/collision_resolver.h
         src/input/app_state.cpp
         src/input/app_state.h
         src/input/draw_state.cpp

@@ -4,6 +4,7 @@
 
 #include "raylib.h"
 #include <iostream>
+#include <memory>
 #include <vector>
 #include <unordered_map>
 
@@ -19,7 +20,7 @@ int main() {
 
     const int minScreenWidth = 800;
     const int minScreenHeight = 600;
-    std::vector<Shape> shapes; // List of shapes in the current state
+    std::vector<std::unique_ptr<Shape>> shapes; // List of shapes in the current state
 
     /* ---- */
 
