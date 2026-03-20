@@ -15,7 +15,7 @@ public:
     void onEnter() override;
     void onExit() override;
 
-    DrawState(Camera2D* camera, std::vector<Shape>* shapes);
+    DrawState(AppContext context);
 
 };
 

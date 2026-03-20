@@ -15,7 +15,7 @@ public:
     void onEnter() override;
     void onExit() override;
 
-    SimulationState(Camera2D* camera, std::vector<Shape>* shapes);
+    SimulationState(AppContext context);
 
 };
 

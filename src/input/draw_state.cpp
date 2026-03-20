@@ -4,8 +4,7 @@
 
 #include "draw_state.h"
 
-DrawState::DrawState(Camera2D* camera, std::vector<Shape>* shapes)
-    : AppState(camera, shapes) {}
+DrawState::DrawState(AppContext context) : AppState(context, StateId::DRAW) {}
 
 void DrawState::handle_input() {
 
@@ -21,7 +20,7 @@ void DrawState::update() {
 }
 
 void DrawState::draw() {
-    for (Shape& shape : *shapes) {
+    for (Shape& shape : *context.shapes) {
         shape.draw_shape();
     }
 }

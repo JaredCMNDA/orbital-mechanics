@@ -11,30 +11,46 @@
 #include "../core/shape.h"
 
 enum class StateId {
+    MENU,
     SIMULATION,
     DRAW,
     NONE
 };
 
+struct AppContext {
+    Camera2D* camera;
+    std::vector<Shape>* shapes;
+    Font* font;
+};
+
 class AppState {
 public:
+    StateId nextStateId = StateId::NONE; // indicates which state to transition to if any
+    StateId currentStateId = StateId::NONE; // indicates which state is currently active
+
     virtual void handle_input() = 0; // reacts to input
     virtual void update() = 0; // per frame logic
     virtual void draw() = 0; // draw
     virtual void onEnter() = 0; // called when state is entered, for setup
     virtual void onExit() = 0; // called when state is exited, for cleanup
-
-    StateId nextStateId = StateId::NONE; // indicates which state to transition to if any
+    virtual const char* getStateId() {
+        switch (currentStateId) {
+            case StateId::MENU:
+                return "MENU";
+            case StateId::SIMULATION:
+                return "SIMULATION";
+            case StateId::DRAW:
+                return "DRAW";
+            default:
+                return "NONE";
+        }
+    };
 
 protected:
-    Camera2D* camera;
-    std::vector<Shape>* shapes;
+    AppContext context;
 
-    // constructor contains references to shared data like camera and shape list so states can modify them
-    AppState(Camera2D* camera, std::vector<Shape>* shapes)
-        : camera(camera), shapes(shapes) {}
+    AppState(AppContext context, StateId stateId) : currentStateId(stateId), context(context) {}
 
-    // virtual destructor for proper cleanup of derived classes
     virtual ~AppState() = default;
 
 };

@@ -11,7 +11,7 @@
 #include "core/shape.h"
 #include "input/draw_state.h"
 #include "input/simulation_state.h"
-
+#include "input/menu_state.h"
 
 int main() {
 
@@ -43,18 +43,22 @@ int main() {
 
     /* --- States --- */
 
-    SimulationState simulationState(&camera, &shapes);
-    DrawState drawState(&camera, &shapes);
+    AppContext appContext = { &camera, &shapes, &font };
+
+    SimulationState simulationState(appContext);
+    DrawState drawState(appContext);
+    MenuState menuState(appContext);
 
     // Map of state IDs to state instances for easy switching
     // Think JS map; [key, value] with the key being the stateID
     // and the value being a pointer to the state instance we declared above
     std::unordered_map<StateId, AppState*> states = {
+        { StateId::MENU, &menuState }, // Placeholder for menu state if needed
         { StateId::SIMULATION, &simulationState },
         { StateId::DRAW, &drawState }
     };
 
-    AppState* currentState = &simulationState; // Start in simulation state
+    AppState* currentState = &menuState; // Start in simulation state
 
     while (!WindowShouldClose()) {
 
@@ -94,7 +98,7 @@ int main() {
         DrawTextEx(font, TextFormat("Zoom: %.2f", camera.zoom), { 25, 75 }, 20, 1, WHITE);
         DrawTextEx(font, TextFormat("Rotation: %.2f", camera.rotation), { 25, 100 }, 20, 1, WHITE);
         DrawTextEx(font, TextFormat("Target: (%.2f, %.2f)", camera.target.x, camera.target.y), { 25, 125 }, 20, 1, WHITE);
-        DrawTextEx(font, TextFormat("State: %s", currentState == &simulationState ? "Simulation" : "Drawing"), { 25, 150 }, 20, 1, YELLOW);
+        DrawTextEx(font, TextFormat("State: %s", currentState->getStateId()), { 25, 150 }, 20, 1, WHITE);
 
         EndDrawing();
     }

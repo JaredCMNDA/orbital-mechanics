@@ -32,7 +32,9 @@ add_executable(orbital-mechanics src/main.cpp
         src/input/draw_state.cpp
         src/input/draw_state.h
         src/input/simulation_state.cpp
-        src/input/simulation_state.h)
+        src/input/simulation_state.h
+        src/input/menu_state.cpp
+        src/input/menu_state.h)
 
 target_link_libraries(orbital-mechanics PRIVATE raylib)
 
