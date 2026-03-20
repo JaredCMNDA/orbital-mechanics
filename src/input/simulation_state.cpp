@@ -43,8 +43,7 @@ void SimulationState::handle_input() {
     }
 
     if (IsKeyPressed(KEY_K)) {
-        // go to draw state
-        nextState = drawState;
+        nextStateId = StateId::DRAW;
     }
 
 }

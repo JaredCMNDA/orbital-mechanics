@@ -6,7 +6,6 @@
 #define ORBITAL_MECHANICS_DRAW_STATE_H
 
 #include "app_state.h"
-#include "simulation_state.h"
 
 class DrawState : public AppState {
 public:
@@ -17,8 +16,6 @@ public:
     void onExit() override;
 
     DrawState(Camera2D* camera, std::vector<Shape>* shapes);
-
-    AppState* simulationState;
 
 };
 

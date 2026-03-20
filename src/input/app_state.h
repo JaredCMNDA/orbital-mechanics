@@ -10,6 +10,12 @@
 #include "raylib.h"
 #include "../core/shape.h"
 
+enum class StateId {
+    SIMULATION,
+    DRAW,
+    NONE
+};
+
 class AppState {
 public:
     virtual void handle_input() = 0; // reacts to input
@@ -18,7 +24,7 @@ public:
     virtual void onEnter() = 0; // called when state is entered, for setup
     virtual void onExit() = 0; // called when state is exited, for cleanup
 
-    AppState* nextState = nullptr; // pointer to the next state to transition to, set by current state when switching
+    StateId nextStateId = StateId::NONE; // indicates which state to transition to if any
 
 protected:
     Camera2D* camera;

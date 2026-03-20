@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 #include "raymath.h"
 #include "core/shape.h"
@@ -45,8 +46,13 @@ int main() {
     SimulationState simulationState(&camera, &shapes);
     DrawState drawState(&camera, &shapes);
 
-    simulationState.drawState = &drawState;
-    drawState.simulationState = &simulationState;
+    // Map of state IDs to state instances for easy switching
+    // Think JS map; [key, value] with the key being the stateID
+    // and the value being a pointer to the state instance we declared above
+    std::unordered_map<StateId, AppState*> states = {
+        { StateId::SIMULATION, &simulationState },
+        { StateId::DRAW, &drawState }
+    };
 
     AppState* currentState = &simulationState; // Start in simulation state
 
@@ -56,11 +62,12 @@ int main() {
 
         currentState->handle_input();
 
-        if (currentState->nextState) {
-            currentState->onExit();
-            currentState = currentState->nextState;
-            currentState->nextState = nullptr;
-            currentState->onEnter();
+        if (currentState->nextStateId != StateId::NONE) {
+            StateId nextId = currentState->nextStateId; // store next state ID before resetting it
+            currentState->nextStateId = StateId::NONE; // reset nextStateId to prevent repeated transitions
+            currentState->onExit(); // call onExit of current state for cleanup
+            currentState = states[nextId]; // switch to the next state using the map
+            currentState->onEnter(); // call onEnter of the new state for setup
         }
 
         /* --- UPDATE --- */

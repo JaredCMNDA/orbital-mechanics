@@ -11,7 +11,7 @@ void DrawState::handle_input() {
 
     if (IsKeyPressed(KEY_K)) {
         // go back to simulation state
-        nextState = simulationState;
+        nextStateId = StateId::SIMULATION; 
     }
 
 }
